@@ -17,9 +17,9 @@ var database = require('../database/database.js')
  */
 router.post('/login', function (req, res) {
     let loginEmail = req.body.loginEmail
-    console.log(loginEmail)
+   // console.log(loginEmail)
     let loginPassword = req.body.loginPassword
-    console.log(loginPassword)
+   // console.log(loginPassword)
     if (!loginEmail || !loginPassword)
         res.json({
             status: 1,
@@ -90,18 +90,19 @@ router.get('/logout', function (req, res) {
 //注册
 router.post('/register', function (req, res) {
     let loginName = req.body.loginName;
-    console.log(loginName)
+   // console.log(loginName)
     let loginEmail = req.body.loginEmail;
-    console.log(loginEmail)
+   // console.log(loginEmail)
     let loginPassword = req.body.loginPassword;
-    console.log(loginPassword)
-
-    let user = new database.user();
-    user.userName = loginName;
-    user.password = loginPassword;
-    user.email = loginEmail;
-    user.save(function (error) {
-        if (!error) {
+    //console.log(loginPassword)
+    if(loginEmail&&loginName&&loginPassword)
+    {
+        let user = new database.user();
+       user.userName = loginName;
+       user.password = loginPassword;
+       user.email = loginEmail;
+      user.save(function (error) {
+         if (!error) {
             res.json({
                 status: 0,
                 message: '注册成功'
@@ -111,6 +112,14 @@ router.post('/register', function (req, res) {
             res.send(JSON.stringify(error))
         }
     });
+    }else
+    {
+        res.json({
+            status:1,
+            message:"注册失败"
+        })
+    }
+    
 
 })
 

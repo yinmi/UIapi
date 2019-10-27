@@ -174,4 +174,32 @@ router.post('postcomment/:artid',function(req,res){
     
 })
 
+商品列表
+router.get('/getgoods?pageindex=number',function(req,res){
+    let pageindex = req.query.pageindex-1
+
+    let goodsList=[]
+
+    database.goods.find().skip(pageindex*10).limit(10).exec(function(error,result){
+        result.forEach(item=>{
+            goodsList.push({
+                id:item.id,
+                title:item.title,
+                add_time:item.add_time,
+                zhaiyao:item.zhaiyao,
+                click:item.click,
+                img_url:item.img_url,
+                sell_price:item.sell_price,
+                market_price:item.market_price,
+                stock_quantity:item.count
+            })
+        })
+
+    })
+    
+    res.json(goodsList)
+    
+
+})
+
 module.exports = router
