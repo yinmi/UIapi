@@ -174,7 +174,7 @@ router.post('postcomment/:artid',function(req,res){
     
 })
 
-商品列表
+//商品列表
 router.get('/getgoods?pageindex=number',function(req,res){
     let pageindex = req.query.pageindex-1
 
@@ -199,6 +199,71 @@ router.get('/getgoods?pageindex=number',function(req,res){
     
     res.json(goodsList)
     
+
+})
+
+//商品图文介绍
+router.get('/goods/getdesc/:id',function(req,res){
+    let goodId=req.params.id;
+
+    let message={}
+
+    database.goods.findOne().where({id:goodId}).exec((error,result)=>{
+        if(error) throw error;
+        message.title=result.title;
+        message.conent=result.conent;
+    })
+
+    res.json(message)
+})
+
+//购物车数据
+router.get('/goods/getshopcarlist',function(req,res){
+   let user_email = req.cookies.login;
+
+   let  id = null;
+
+   let shopTroller=[]
+
+   database.user.findOne().where({email:user_email}).exec(function(error,result){
+        if(error) throw error;
+         id=result.id;
+
+   })
+
+  database.shopTroller.find().where({user_id:id}).exec((error,result)=>{
+      if (error)  throw error;
+      result.forEach(item=>{
+          shopTroller.push({
+              cou:item.count,
+              id:item.goodId,
+              title:item.title,
+              sell_price:item.title,
+              thumb_path:item.img_url
+            })
+      })
+  })
+
+})
+
+
+//获取商品参数区和价格，标题等数据
+router.get('/goods/getinfo/:id',function(req,res){
+  let goodId= req.params.id;
+  let message ={}
+  database.goods.findOne().where({id:goodId}).exec((error,result)=>{
+     if(error) throw error;
+     
+      message.id = result.id;
+      message.title =  result.title;
+      message.add_time = result.add_time;
+      message.goods_no = result.goods_no;
+      message.stock_quantity = result.count;
+      message.market_price = result.market_price;
+      message.sell_price = result.sell_price;
+  })
+   
+  res.json(message)
 
 })
 
