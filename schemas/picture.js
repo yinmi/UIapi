@@ -11,7 +11,7 @@
 var mongoose=require('mongoose')
 
 module.exports=mongoose.Schema({
-    id:{type:Number,required:true},
+    id:mongoose.Schema.Types.ObjectId,
     add_time:{type:Date,default:Date.now()},
     title:String,
     img_url:String,

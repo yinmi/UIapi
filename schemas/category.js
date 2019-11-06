@@ -6,6 +6,6 @@
 var mongoose=require('mongoose')
 
 module.exports=mongoose.Schema({
-    id:{type:Number,required:true},
+    id:mongoose.Schema.Types.ObjectId,
     title:String
 })

@@ -19,7 +19,7 @@ database.picture=mongoose.model('picture',pictureShemas)
 
 database.news=mongoose.model('news',newsShemas)
 
-database.imagOther = mongoose.model('imagOther',imagOtherShemas)
+database.imgOther = mongoose.model('imagOther',imagOtherShemas)
 
 database.comment = mongoose.model('comment',commentShemas)
 

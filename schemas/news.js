@@ -8,10 +8,11 @@
 6. img_url
 7. content
  */
+
 var mongoose=require('mongoose')
 
 module.exports=mongoose.Schema({
-    id:{type:Number,required:true},
+    id:mongoose.Schema.Types.ObjectId,
     tite:{type:String},
     add_time:{type:Date,default:Date.now()},
     img_url:String,

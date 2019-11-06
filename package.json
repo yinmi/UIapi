@@ -4,7 +4,8 @@
   "description": "api",
   "main": "main.js",
   "scripts": {
-    "dev": "nodemon main.js"
+    "dev": "nodemon main.js",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -15,9 +16,11 @@
   "dependencies": {
     "babel-cli": "^6.26.0",
     "body-parser": "^1.19.0",
+    "chai": "^4.2.0",
     "cookie-parser": "^1.4.4",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
+    "mocha": "^6.2.2",
     "mongoose": "^5.7.6",
     "nodemon": "^1.19.4"
   },
